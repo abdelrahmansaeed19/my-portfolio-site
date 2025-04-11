@@ -149,7 +149,7 @@ const addTransformIndexHtml = {
 	},
 };
 
-export default defineConfig({base: '/horizons-export-my-portfolio-site/' ,
+export default defineConfig({base: '/my-portfolio-site/' ,
 	plugins: [react(), addTransformIndexHtml],
 	server: {
 		cors: true,
