@@ -1,8 +1,26 @@
-import path from 'node:path';
-import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
-
-const configHorizonsViteErrorHandler = `
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
+		<meta name="generator" content="Hostinger Horizons" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Hostinger Horizons</title>
+		<script type="module" crossorigin src="/horizons-export-my-portfolio-site/assets/index-b2754cb2.js"></script>
+		<link rel="stylesheet" href="/horizons-export-my-portfolio-site/assets/index-7ee5733f.css">
+		<script type="module">
+window.onerror = (message, source, lineno, colno, errorObj) => {
+	window.parent.postMessage({
+		type: 'horizons-runtime-error',
+		message,
+		source,
+		lineno,
+		colno,
+		error: errorObj && errorObj.stack
+	}, '*');
+};
+</script>
+		<script type="module">
 const observer = new MutationObserver((mutations) => {
 	for (const mutation of mutations) {
 		for (const addedNode of mutation.addedNodes) {
@@ -47,22 +65,8 @@ function handleViteOverlay(node) {
 		}, '*');
 	}
 }
-`;
-
-const configHorizonsRuntimeErrorHandler = `
-window.onerror = (message, source, lineno, colno, errorObj) => {
-	window.parent.postMessage({
-		type: 'horizons-runtime-error',
-		message,
-		source,
-		lineno,
-		colno,
-		error: errorObj && errorObj.stack
-	}, '*');
-};
-`;
-
-const configHorizonsConsoleErrroHandler = `
+</script>
+		<script type="module">
 const originalConsoleError = console.error;
 console.error = function(...args) {
 	originalConsoleError.apply(console, args);
@@ -74,9 +78,8 @@ console.error = function(...args) {
 		error: errorString
 	}, '*');
 };
-`;
-
-const configWindowFetchMonkeyPatch = `
+</script>
+		<script type="module">
 const originalFetch = window.fetch;
 
 window.fetch = function(...args) {
@@ -105,63 +108,17 @@ window.fetch = function(...args) {
 			return response;
 		})
 		.catch(error => {
-			if (!url.match(/\.html?$/i)) {
+			if (!url.match(/.html?$/i)) {
 				console.error(error);
 			}
 
 			throw error;
 		});
 };
-`;
-
-const addTransformIndexHtml = {
-	name: 'add-transform-index-html',
-	transformIndexHtml(html) {
-		return {
-			html,
-			tags: [
-				{
-					tag: 'script',
-					attrs: { type: 'module' },
-					children: configHorizonsRuntimeErrorHandler,
-					injectTo: 'head',
-				},
-				{
-					tag: 'script',
-					attrs: { type: 'module' },
-					children: configHorizonsViteErrorHandler,
-					injectTo: 'head',
-				},
-				{
-					tag: 'script',
-					attrs: {type: 'module'},
-					children: configHorizonsConsoleErrroHandler,
-					injectTo: 'head',
-				},
-				{
-					tag: 'script',
-					attrs: { type: 'module' },
-					children: configWindowFetchMonkeyPatch,
-					injectTo: 'head',
-				},
-			],
-		};
-	},
-};
-
-export default defineConfig({base: '/horizons-export-my-portfolio-site/' ,
-	plugins: [react(), addTransformIndexHtml],
-	server: {
-		cors: true,
-		headers: {
-			'Cross-Origin-Embedder-Policy': 'credentialless',
-		},
-		allowedHosts: true,
-	},
-	resolve: {
-		extensions: ['.jsx', '.js', '.tsx', '.ts', '.json', ],
-		alias: {
-			'@': path.resolve(__dirname, './src'),
-		},
-	},
-});
+</script>
+	</head>
+	<body>
+		<div id="root"></div>
+		
+	</body>
+</html>
