@@ -1,0 +1,119 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+ 
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+ 
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.section-title {
+  @apply text-3xl font-bold mb-6 text-primary;
+}
+
+.card {
+  @apply bg-card rounded-lg shadow-lg p-6 transition-all duration-300 hover:shadow-xl;
+}
+
+.hero-text {
+  @apply text-6xl md:text-8xl font-bold;
+  background: linear-gradient(to right, #1a365d, #2563eb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  @apply text-xl md:text-2xl text-muted-foreground mt-4;
+}
+
+.scroll-indicator {
+  @apply absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0) translateX(-50%);
+  }
+  40% {
+    transform: translateY(-30px) translateX(-50%);
+  }
+  60% {
+    transform: translateY(-15px) translateX(-50%);
+  }
+}
+
+.section-wrapper {
+  @apply py-20 relative overflow-hidden;
+}
+
+.gradient-bg {
+  @apply absolute inset-0 opacity-10 pointer-events-none;
+  background: radial-gradient(circle at center, #2563eb 0%, transparent 70%);
+}
+
+.skill-card {
+  @apply flex items-center gap-3 p-4 rounded-lg bg-white shadow-md hover:shadow-lg transition-all duration-300;
+}
+
+.profile-image {
+  @apply relative rounded-2xl overflow-hidden shadow-2xl;
+  aspect-ratio: 3/4;
+}
+
+.profile-image::after {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-b from-transparent to-black/50;
+}
